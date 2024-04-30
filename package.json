@@ -1,0 +1,17 @@
+{
+  "name": "youtube-transcript-api",
+  "version": "1.0.0",
+  "description": "Youtube transcript api",
+  "main": "index.js",
+  "scripts": {
+    "build": "rimraf ./dist && tsc",
+    "start": "npm run build && node dist/index.js"
+  },
+  "author": "Vicfou",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.12.7",
+    "rimraf": "^5.0.5",
+    "typescript": "^5.4.5"
+  }
+}
