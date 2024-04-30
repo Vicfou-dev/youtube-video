@@ -31,9 +31,9 @@ You will receive something like that
             {
                 "start": 0,
                 "duration": 6.339,
-                "text": 'Hello everyone thanks you so much for the last video'
+                "text": "Hello everyone thanks you so much for the last video"
             }
-            ...
+            # ...
         ]
     }
 ```
@@ -56,7 +56,6 @@ You will receive something like that
                 "duration": 6.339,
                 "text": "Hello everyone thanks you so much for the last video"
             }
-            ...
         ]
     },
     {
@@ -68,7 +67,6 @@ You will receive something like that
                 "duration": 5.439,
                 "text": "¡Hola a todos, muchas gracias por el último video!"
             }
-            ...
         ]
     }
 ```
@@ -92,7 +90,6 @@ You will receive something like that
                     "duration": 6.339,
                     "text": "Hello everyone thanks you so much for the last video"
                 }
-                ...
             ]
         },
         {
@@ -104,7 +101,6 @@ You will receive something like that
                     "duration": 1.219,
                     "text": "Welcome everybody !"
                 }
-                ...
             ]
         }
     ]
