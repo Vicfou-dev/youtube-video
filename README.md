@@ -33,7 +33,6 @@ You will receive something like that
                 "duration": 6.339,
                 "text": "Hello everyone thanks you so much for the last video"
             }
-            # ...
         ]
     }
 ```
