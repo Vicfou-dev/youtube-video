@@ -9,10 +9,17 @@ export class Transcriptor {
      * @param languages Languages to fetch
      */
     public async getTranscript(url: string, languages : Array<string>|string = ['en']): Promise<Transcription[]|Transcription> {
+        if (typeof languages === 'string') {
+            languages = [languages];
+        }
 
         const transcripts = await this.listTranscripts(url);
 
-        const filteredTranscriptions = typeof languages === 'string' ? transcripts.get(languages) : transcripts.getMultiple(languages);
+        const filteredTranscriptions = transcripts.getMultiple(languages);
+        
+        if(filteredTranscriptions.length == 1) {
+            return filteredTranscriptions[0];
+        }
 
         return filteredTranscriptions;
     }

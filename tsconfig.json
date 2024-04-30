@@ -8,5 +8,6 @@
     "sourceRoot": "./src/",
     "rootDir": "./src/",
     "sourceMap": true
-  }
+  },
+  "include": ["src"]
 }
