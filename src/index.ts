@@ -1,2 +1,4 @@
 import { Transcriptor } from "./transcriptor";
-new Transcriptor().getTranscript('https://www.youtube.com/watch?v=0SItu2xPx-4', 'en');
+import { TranscriptionList, Transcription } from "./transcription";
+import { TranscriptionDisabledError, VideoUnavailableError, InvalidVideoUrlError, InvalidLanguageError, TooManyRequestsError, LanguageNotAvailableError } from "./error";
+export { Transcriptor, TranscriptionList, Transcription, TranscriptionDisabledError, VideoUnavailableError, InvalidVideoUrlError, InvalidLanguageError, TooManyRequestsError, LanguageNotAvailableError };
