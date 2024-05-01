@@ -4,6 +4,12 @@ export class TranscriptionDisabledError extends Error {
     }
 }
 
+export class MetricNotAvaible extends Error {
+    constructor() {
+        super('Metric is not available for this video');
+    }
+}
+
 export class VideoUnavailableError extends Error {
     constructor() {
         super('Video is unavailable');

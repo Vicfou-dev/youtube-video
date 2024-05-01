@@ -1,8 +1,16 @@
-import { RegexExtractYoutubeVideoId, YoutubeUrl, UserAgent, RegexExtractFromXml } from "./constant";
-import { TranscriptionDisabledError, VideoUnavailableError, TooManyRequestsError } from "./error";
+import { UserAgent, RegexExtractFromXml } from "@youtube-video-core/constants";
+import { TranscriptionDisabledError } from "@youtube-video-core/errors";
 import { TranscriptionList, Transcription } from "./transcription";
+import { Core } from "@youtube-video-core/index";
 
 export class Transcriptor {
+
+    private youtube: Core;
+
+    constructor() {
+        this.youtube = new Core();
+    }
+
     /**
      * Fetch transcript from multiple Youtube Video
      * @param url Video url
@@ -16,7 +24,7 @@ export class Transcriptor {
         const transcripts = await this.listTranscripts(url);
 
         const filteredTranscriptions = transcripts.getMultiple(languages);
-        
+
         if(filteredTranscriptions.length == 1) {
             return filteredTranscriptions[0];
         }
@@ -55,29 +63,14 @@ export class Transcriptor {
      * @param url Url of the video
      */
     public async listTranscripts(url : string): Promise<TranscriptionList> {
-        const videoId = this.getVideoId(url);
+        const videoId = this.youtube.getVideoId(url);
         if(videoId.startsWith('http')) {
             throw new Error('Invalid video url');
         }
 
-        const video = await this.fetchVideo(videoId);
+        const video = await this.youtube.fetchVideo(videoId);
         const transcripts = await this.parseTranscript(video);
         return transcripts;
-    }
-
-    /**
-     * Fetch video page
-     * @param videoId Video id
-     */
-    private async fetchVideo(videoId: string): Promise<string> {
-        return await this.fetchHtml(videoId);
-    }
-
-    private async fetchHtml(videoId: string): Promise<string> {
-        const headers = { 'User-Agent' : UserAgent, 'Accept-Language': 'en-US' }
-
-        const response = await fetch(`${YoutubeUrl}?v=${videoId}`, { credentials: 'include', headers });
-        return await response.text();
     }
 
     /**
@@ -86,20 +79,12 @@ export class Transcriptor {
      */
     private async parseTranscript(page: string): Promise<TranscriptionList>  {
         const raw = page.split('"captions":');
-        if(raw.length > 1) {
-            const { captionTracks } = (() => { try { return JSON.parse(raw[1].split(',"videoDetails')[0].replace('\n', '')); } catch (e) { return undefined; } })()?.['playerCaptionsTracklistRenderer'];
-            return this.buildTranscript(captionTracks);
+        if(raw.length < 2) {
+            throw new TranscriptionDisabledError();
         }
 
-        if(page.includes('class="g-recaptcha')) {
-            throw new TooManyRequestsError();
-        }
-
-        if(!page.includes("playabilityStatus")) {
-            throw new VideoUnavailableError();
-        }
-        
-        throw new TranscriptionDisabledError()
+        const { captionTracks } = (() => { try { return JSON.parse(raw[1].split(',"videoDetails')[0].replace('\n', '')); } catch (e) { return undefined; } })()?.['playerCaptionsTracklistRenderer'];
+        return this.buildTranscript(captionTracks);
     }
 
     private async fetchXmlTranscript(url: string): Promise<string> {
@@ -120,22 +105,5 @@ export class Transcriptor {
         }
 
         return new TranscriptionList(transcripts);
-    }
-
-    /**
-     * Get video id of the video for the given url
-     * @param url 
-     */
-    private getVideoId(url: string): string {
-        if(url.length == 11) {
-            return url;
-        }
-
-        const [baseUrl, videoId] = url.match(RegexExtractYoutubeVideoId);
-        if(videoId) {
-            return videoId;
-        }
-
-        return url
     }
 }

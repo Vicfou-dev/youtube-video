@@ -1,6 +1,6 @@
 {
-  "name": "youtube-transcript-api",
-  "version": "1.0.3",
+  "name": "youtube-video-transcript",
+  "version": "1.0.0",
   "description": "Youtube transcript api",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -10,7 +10,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/Vicfou-dev/youtube-transcript-api"
+    "url": "https://github.com/Vicfou-dev/youtube-video"
   },
   "scripts": {
     "build": "tsup",

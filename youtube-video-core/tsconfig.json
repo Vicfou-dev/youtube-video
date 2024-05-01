@@ -7,7 +7,7 @@
     "outDir": "./dist/",
     "sourceRoot": "./src/",
     "rootDir": "./src/",
-    "sourceMap": true
+    "sourceMap": true,
   },
   "include": ["src"]
 }
