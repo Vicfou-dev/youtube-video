@@ -31,10 +31,10 @@ This plugin can be downloaded with the following command
 Each project can be installed independently by moving into the project directory and running ``npm install``.
 
 ## Building
-Each project can be built independently by moving into the project directory and running ``npm run build`è.
+Each project can be built independently by moving into the project directory and running ``npm run build``.
 
 ## Testing
 Each project can be tested independently by moving into the project directory and running ``npm run test``.
 
-### License
-**This project is licensed under the ISC license.**
+## License
+[This project is licensed under the ISC license](license.md) 

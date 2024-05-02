@@ -127,6 +127,3 @@ In different languages
 ```js
 listTranscripts.getMultipleLanguages(['en', 'fr', 'es'])
 ```
-
-## License
-[MIT](license.md) : Feel free to use to this plugin for any of your projects
