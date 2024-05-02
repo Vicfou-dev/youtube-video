@@ -1,6 +1,6 @@
 # Youtube-Video-Api
 
-[![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](http://opensource.org/licenses/MIT) [![image](https://shields.io/badge/TypeScript-3178C6?logo=TypeScript&logoColor=FFF&style=flat-square)](https://pypi.org/project/youtube-transcript-api/) 
+[![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](http://opensource.org/licenses/MIT) [![image](https://shields.io/badge/TypeScript-3178C6?logo=TypeScript&logoColor=FFF&style=flat-square)](https://github.com/Vicfou-dev/youtube-video/tree/master/youtube-video-transcript) 
 
 A TypeScript Version of Youtube Transcript Api
 
@@ -10,14 +10,14 @@ This repository provides a simple and efficient way to interact with the YouTube
 ## Installation
 Run this command to install it
 ```
-npm i youtube-transcript-api
+npm i youtube-video-transcript 
 ```
 
 ## Example
 
 Quickly import and translate the video of your choice !
 ```js
-import Transcriptor from 'youtube-transcript-api';
+import Transcriptor from 'youtube-video-transcript';
 await Transcriptor.getTranscript('url or video id', ['en'])
 ```
 
@@ -39,7 +39,7 @@ You will receive something like that
 
 It's also possible to fetch transcripts in multiple language
 ```js
-import Transcriptor from 'youtube-transcript-api';
+import Transcriptor from 'youtube-video-transcript';
 await Transcriptor.getTranscript('url or video id', ['en', 'es'])
 ```
 
@@ -73,7 +73,7 @@ You will receive something like that
 If you want you can download multiple transcripts from different videos
 
 ```js
-import Transcriptor from 'youtube-transcript-api';
+import Transcriptor from 'youtube-video-transcript';
 await Transcriptor.getTranscript(['url video 1', 'url video 2'], ['en'])
 ```
 
@@ -108,7 +108,7 @@ You will receive something like that
 If you want you can fetch all the transcripts for a video by doing this
 
 ```js
-import Transcriptor from 'youtube-transcript-api';
+import Transcriptor from 'youtube-video-transcript';
 const listTranscripts = await Transcriptor.listTranscripts('video url')
 ```
 Then use this function to get all the transcripts as an array

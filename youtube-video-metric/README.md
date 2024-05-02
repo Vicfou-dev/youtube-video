@@ -14,119 +14,25 @@ npm i youtube-transcript-api
 ```
 
 ## Example
-
-Quickly import and translate the video of your choice !
-```js
-import Transcriptor from 'youtube-transcript-api';
-await Transcriptor.getTranscript('url or video id', ['en'])
-```
-
-You will receive something like that
-
-```json
-    {
-        "language" : "en",
-        "type" : "auto",
-        "data" : [
-            {
-                "start": 0,
-                "duration": 6.339,
-                "text": "Hello everyone thanks you so much for the last video"
-            }
-        ]
-    }
-```
-
-It's also possible to fetch transcripts in multiple language
-```js
-import Transcriptor from 'youtube-transcript-api';
-await Transcriptor.getTranscript('url or video id', ['en', 'es'])
-```
-
-You will receive something like that
-
-```json
-    {
-        "language" : "en",
-        "type" : "auto",
-        "data" : [
-            {
-                "start": 0,
-                "duration": 6.339,
-                "text": "Hello everyone thanks you so much for the last video"
-            }
-        ]
-    },
-    {
-        "language" : "es",
-        "type" : "manual",
-        "data" : [
-            {
-                "start": 0,
-                "duration": 5.439,
-                "text": "¡Hola a todos, muchas gracias por el último video!"
-            }
-        ]
-    }
-```
-
-If you want you can download multiple transcripts from different videos
-
-```js
-import Transcriptor from 'youtube-transcript-api';
-await Transcriptor.getTranscript(['url video 1', 'url video 2'], ['en'])
-```
-
-You will receive something like that
-```json
-    [
-        {
-            "language" : "en",
-            "type" : "auto",
-            "data" : [
-                {
-                    "start": 0,
-                    "duration": 6.339,
-                    "text": "Hello everyone thanks you so much for the last video"
-                }
-            ]
-        },
-        {
-            "language" : "en",
-            "type" : "auto",
-            "data" : [
-                {
-                    "start": 0,
-                    "duration": 1.219,
-                    "text": "Welcome everybody !"
-                }
-            ]
-        }
-    ]
-```
-
-If you want you can fetch all the transcripts for a video by doing this
-
-```js
-import Transcriptor from 'youtube-transcript-api';
-const listTranscripts = await Transcriptor.listTranscripts('video url')
-```
-Then use this function to get all the transcripts as an array
-```js
-listTranscripts.list()
-```
-Also you can filter this list to have only the transcripts who are generated
-```js
-listTranscripts.getAuto()
-```
-Or who are created manually
-```js
-listTranscripts.getManual()
-```
-In different languages
-```js
-listTranscripts.getMultipleLanguages(['en', 'fr', 'es'])
-```
-
-## License
-[MIT](license.md) : Feel free to use to this plugin for any of your projects
+Name | Type | Description
+|----------|----------|---------|
+videoId	|string	|The id of the video requested
+title	|string	|The title of the video requested
+lengthSeconds |string	|The amount of seconds in the video requested
+keywords[]	|list	|A list of keywords defined by the creator of the video
+channelId	|string	|The id of the channel the video is on
+isOwnerViewing	|boolean	|Is the owner the one who requested this video? (only possible with cookies)
+shortDescription  |string	|The description of the video requested
+isCrawlable	|boolean	|Can search engines see this video? (only true for public videos)
+thumbnail	|object	| An object containing the thumbnail of the video
+thumbnail.thumbnails[]	|list	|A list of thumbnails with different resolutions
+thumbnail.thumbnails[].url	|string	|The url to download the thumbnail from
+thumbnail.thumbnails[].width	|integer	|The width of the thumbnail
+thumbnail.thumbnails[].height	|integer	|The height of the thumbnail
+averageRating	|double	| The like:dislike ratio
+allowRatings	|boolean|	Did the creator choose to disable ratings for this video?
+viewCount	|integer	|The amount of views the video has
+author	|string	|The name of the channel the video was uploaded to
+isPrivate	| boolean	|Is the video private?
+isUnpluggedCorpus	|boolean	| No information
+isLiveContent	|boolean	|Is the video requested currently live/premiering?

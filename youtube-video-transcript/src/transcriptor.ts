@@ -63,41 +63,11 @@ export class Transcriptor {
      * @param url Url of the video
      */
     public async listTranscripts(url : string): Promise<TranscriptionList> {
-        const videoId = this.youtube.getVideoId(url);
-        if(videoId.startsWith('http')) {
-            throw new Error('Invalid video url');
-        }
-
-        const video = await this.youtube.fetchVideo(videoId);
-        const transcripts = await this.parseTranscript(video);
-        return transcripts;
-    }
-
-    /**
-     * Parse transcript from an Html page
-     * @param page Html page
-     */
-    private async parseTranscript(page: string): Promise<TranscriptionList>  {
-        const raw = page.split('"captions":');
-        if(raw.length < 2) {
-            throw new TranscriptionDisabledError();
-        }
-
-        const { captionTracks } = (() => { try { return JSON.parse(raw[1].split(',"videoDetails')[0].replace('\n', '')); } catch (e) { return undefined; } })()?.['playerCaptionsTracklistRenderer'];
-        return this.buildTranscript(captionTracks);
-    }
-
-    private async fetchXmlTranscript(url: string): Promise<string> {
-        const headers = { 'User-Agent' : UserAgent, 'Accept-Language': 'en-US' }
-
-        const response = await fetch(url, { headers });
-        return await response.text();
-    }
-
-    private async buildTranscript(captionsTracks: Array<any>): Promise<TranscriptionList> {
+        const { player } = await this.youtube.fetchMetadata(url);
+        const { captionTracks } = player.captions.playerCaptionsTracklistRenderer;
         const transcripts: Transcription[] = [];
-
-        for(const track of captionsTracks) {
+        
+        for(const track of captionTracks) {
             const { baseUrl, languageCode, kind } = track;
             const page = await this.fetchXmlTranscript(baseUrl);
             const data = [...page.matchAll(RegexExtractFromXml)].map(([, start, duration, text]) => ({ start: parseFloat(start), duration: parseFloat(duration), text }));
@@ -105,5 +75,12 @@ export class Transcriptor {
         }
 
         return new TranscriptionList(transcripts);
+    }
+
+    private async fetchXmlTranscript(url: string): Promise<string> {
+        const headers = { 'User-Agent' : UserAgent, 'Accept-Language': 'en-US' }
+
+        const response = await fetch(url, { headers });
+        return await response.text();
     }
 }

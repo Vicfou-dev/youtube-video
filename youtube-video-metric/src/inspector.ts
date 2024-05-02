@@ -1,6 +1,8 @@
 import { Core } from "@youtube-video-core/index";
 import { RegexExtractMetadata } from "@youtube-video-core/constants";
 import { MetricNotAvaible } from "@youtube-video-core/errors";
+import { Metric } from "./metric";
+import { writeFileSync } from 'fs';
 
 export class Inspector {
 
@@ -15,25 +17,25 @@ export class Inspector {
      * @param url Video url
      * @param languages Languages to fetch
      */
-    public async getMetric(url: string): Promise<string> {
+    public async getMetric(url: string): Promise<Metric> {
+        const metadata = await this.youtube.fetchMetadata(url)
 
-        const videoId = this.youtube.getVideoId(url);
+        var videoDetails = {...metadata.player.videoDetails} as Metric;
 
-        const page = await this.youtube.fetchVideo(videoId);
+        videoDetails.loudness = metadata.player.playerConfig.audioConfig.loudnessDb;
 
-        return this.buildMetric(page);
-        return '';
+        const csi = metadata.player.responseContext.serviceTrackingParams[1];
+        videoDetails.isVideoMonetized = Boolean(csi.params.filter(({key, value}) => key === "yt_ad" && value === "1").pop())
+
+        const playerResponse = metadata.player.microformat.playerMicroformatRenderer
+        const { publishDate, uploadDate, isFamilySafe, category } = playerResponse;
+        videoDetails = {...videoDetails, publishDate, uploadDate, isFamilySafe, category } 
+
+        writeFileSync('debug.json', JSON.stringify(metadata, null, 2));
+
+        return videoDetails;
+
     }
 
-    private async buildMetric(page: string): Promise<string> {
-        const [group, ytInitialPlayerResponse ] = page.match(RegexExtractMetadata);
-        if(!ytInitialPlayerResponse) {
-            throw new MetricNotAvaible()
-        }
-
-        const metadata = JSON.parse(ytInitialPlayerResponse);
-        console.log(metadata);
-        return '';
-    }
 
 }
