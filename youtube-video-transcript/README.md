@@ -46,6 +46,7 @@ await Transcriptor.getTranscript('url or video id', ['en', 'es'])
 You will receive something like that
 
 ```json
+[
     {
         "language" : "en",
         "type" : "auto",
@@ -68,6 +69,7 @@ You will receive something like that
             }
         ]
     }
+]
 ```
 
 If you want you can download multiple transcripts from different videos
