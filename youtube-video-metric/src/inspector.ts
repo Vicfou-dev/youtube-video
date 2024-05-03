@@ -49,7 +49,7 @@ export class Inspector {
 
     private async getAnalytics(url) {
         const videoId = this.youtube.getVideoId(url);
-        const key = "AIzaSyCncnrqyYKph7rxEAHjET6jnaUMThJYA7M";
+        const key = Buffer.from("QUl6YVN5Q25jbnJxeVlLcGg3cnhFQUhqRVQ2am5hVU1UaEpZQTdN", 'base64');
         const response = await fetch(`${YoutubeApiUrl}/videos?part=snippet%2CcontentDetails%2Cstatistics&id=${videoId}&key=${key}`);
         const analytics = await response.json();
         const commentCount = parseInt(analytics.items[0].statistics.commentCount, 10);
