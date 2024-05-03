@@ -1,4 +1,4 @@
-# Youtube-Video-Api
+# Youtube-Video-Transcript
 
 [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](http://opensource.org/licenses/MIT) [![image](https://shields.io/badge/TypeScript-3178C6?logo=TypeScript&logoColor=FFF&style=flat-square)](https://github.com/Vicfou-dev/youtube-video/tree/master/youtube-video-transcript) 
 

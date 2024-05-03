@@ -1,5 +1,7 @@
 export const YoutubeUrl = 'https://www.youtube.com/watch';
 export const YoutubeConsentUrl = 'https://consent.youtube.com/s';
+export const YoutubeDislikeUrl = "https://returnyoutubedislikeapi.com"
+export const YoutubeApiUrl = "https://www.googleapis.com/youtube/v3"
 export const RegexExtractYoutubeVideoId = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/i;
 export const RegexExtractFromXml = /<text start="([^"]*)" dur="([^"]*)">([^<]*)<\/text>/g;
 export const RegexExtractMetadataPlayer = /var\s+ytInitialPlayerResponse\s*=\s*({.*?});/s;
