@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Page</title>
+</head>
+<body>
+    <button>Download</button>
+</body>
+<script src="../dist/streamsaver.js"></script>
+<script type="module">
+    import downloader from '../dist/index.mjs';
+    document.querySelector('button').addEventListener('click', () => {
+        downloader.setProxy('http://localhost:8080').download('https://www.youtube.com/watch?v=et9gw5xbtoY');
+    });
+</script>
+</html>

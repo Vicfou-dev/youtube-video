@@ -24,7 +24,6 @@ export class Transcriptor {
         const transcripts = await this.listTranscripts(url);
 
         const filteredTranscriptions = transcripts.getMultiple(languages);
-
         if(filteredTranscriptions.length == 1) {
             return filteredTranscriptions[0];
         }

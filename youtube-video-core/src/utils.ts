@@ -3,6 +3,8 @@ export const match = (str: string, regex: RegExp) => {
     return result ? result[1] : null;
 }
 
+export const isBrowser = () => typeof module === 'undefined' || !module.exports
+
 export const convertToNumber = (text: string) => {
     const abbreviation: { [key: string]: number } = {
         'K': 1000,

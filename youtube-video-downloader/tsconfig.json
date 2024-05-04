@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "ES2018",
+    "module": "commonjs",
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "outDir": "./dist/",
+    "sourceRoot": "..",
+    "rootDir": "..",
+    "paths": {
+      "@youtube-video-core/*": ["../youtube-video-core/src/*"]
+    },
+    "sourceMap": true
+  },
+  "include": ["src"]
+}

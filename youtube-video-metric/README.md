@@ -13,12 +13,20 @@ Run this command to install it
 npm i youtube-video-metric
 ```
 
+Or import it in your browser
+
+```html
+<script type="module">
+    import Inspector from '../dist/index.mjs';
+</script>
+```
+
 ## Example
 
 Quickly import and translate the video of your choice !
 ```js
 import Inspector from 'youtube-video-metric';
-await Inspector.getTranscript('url or video id')
+await Inspector.getMetric('url or video id')
 ```
 
 You will receive something like that

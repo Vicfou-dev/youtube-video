@@ -1,7 +1,7 @@
 {
-  "name": "youtube-video-metric",
-  "version": "1.0.2",
-  "description": "Youtube video metric",
+  "name": "youtube-video-downloader",
+  "version": "1.0.0",
+  "description": "Youtube video downloader",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -36,7 +36,7 @@
     "url": "https://github.com/Vicfou-dev/youtube-video"
   },
   "scripts": {
-    "build": "tsup",
+    "build": "tsup && copy lib\\streamsaver.js dist\\streamsaver.js",
     "test": "jest"
   },
   "author": "Vicfou",

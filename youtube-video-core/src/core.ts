@@ -1,6 +1,7 @@
 import { RegexExtractYoutubeVideoId, RegexExtractYoutubeVideoIdFromShortUrl, YoutubeUrl, UserAgent, RegexExtractMetadata, RegexExtractMetadataPlayer } from "./constants";
 import { VideoUnavailableError, TooManyRequestsError, MetricNotAvaible } from "./errors";
-import { match } from "./utils";
+import { match, isBrowser } from "./utils";
+import proxy from "./proxy";
 
 export class Core {
     /**
@@ -11,10 +12,15 @@ export class Core {
         return await this.fetchHtml(videoId);
     }
 
+    public setProxy(url: string) {
+        proxy.setProxy(url);
+    }
+
     private async fetchHtml(videoId: string): Promise<string> {
         const headers = { 'User-Agent' : UserAgent, 'Accept-Language': 'en-US' }
 
-        const response = await fetch(`${YoutubeUrl}?v=${videoId}`, { credentials: 'include', headers });
+        var url = `${YoutubeUrl}?v=${videoId}`;
+        const response = await proxy.fetchProxy(`${url}`, { headers }, isBrowser());
         const page = await response.text();
 
         if(page.includes('class="g-recaptcha')) {

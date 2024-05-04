@@ -6,25 +6,27 @@
     "module": "./dist/index.mjs",
     "types": "./dist/index.d.ts",
     "files": [
-      "dist"
+        "dist"
     ],
     "repository": {
-      "type": "git",
-      "url": "https://github.com/Vicfou-dev/youtube-video-core"
+        "type": "git",
+        "url": "https://github.com/Vicfou-dev/youtube-video-core"
     },
     "scripts": {
-      "build": "tsup",
-      "test": "jest"
+        "build": "tsup",
+        "test": "jest"
     },
     "author": "Vicfou",
     "license": "ISC",
     "devDependencies": {
-      "@types/jest": "^29.5.12",
-      "@types/node": "^20.12.7",
-      "jest": "^29.7.0",
-      "ts-jest": "^29.1.2",
-      "tsup": "^8.0.2",
-      "typescript": "^5.4.5"
+        "@types/jest": "^29.5.12",
+        "@types/node": "^20.12.7",
+        "jest": "^29.7.0",
+        "ts-jest": "^29.1.2",
+        "tsup": "^8.0.2",
+        "typescript": "^5.4.5"
+    },
+    "dependencies": {
+        "tiny-cors-proxy": "^1.0.0"
     }
-  }
-  
+}

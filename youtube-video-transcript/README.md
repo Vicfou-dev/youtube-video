@@ -13,6 +13,14 @@ Run this command to install it
 npm i youtube-video-transcript 
 ```
 
+Or import it in your browser
+
+```html
+<script type="module">
+    import Inspector from '../dist/index.mjs';
+</script>
+```
+
 ## Example
 
 Quickly import and translate the video of your choice !
@@ -20,6 +28,15 @@ Quickly import and translate the video of your choice !
 import Transcriptor from 'youtube-video-transcript';
 await Transcriptor.getTranscript('url or video id', ['en'])
 ```
+
+If you are working directly in your browser
+```html
+<script type="module">
+    import Inspector from '../dist/index.mjs';
+    (async () =>await Transcriptor.getTranscript('url or video id', ['en']))();
+</script>
+```
+
 
 You will receive something like that
 
@@ -41,6 +58,14 @@ It's also possible to fetch transcripts in multiple language
 ```js
 import Transcriptor from 'youtube-video-transcript';
 await Transcriptor.getTranscript('url or video id', ['en', 'es'])
+```
+
+If you are working directly in your browser
+```html
+<script type="module">
+    import Inspector from '../dist/index.mjs';
+    (async () =>await Transcriptor.getTranscript('url or video id', ['en', 'es']))();
+</script>
 ```
 
 You will receive something like that
@@ -77,6 +102,14 @@ If you want you can download multiple transcripts from different videos
 ```js
 import Transcriptor from 'youtube-video-transcript';
 await Transcriptor.getTranscript(['url video 1', 'url video 2'], ['en'])
+```
+
+If you are working directly in your browser
+```html
+<script type="module">
+    import Inspector from '../dist/index.mjs';
+    (async () => await Transcriptor.getTranscript(['url video 1', 'url video 2'], ['en']))();
+</script>
 ```
 
 You will receive something like that
