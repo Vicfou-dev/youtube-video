@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fetch Metric of a video</title>
+</head>
+<body>
+    <button>Fetch Metric</button>
+</body>
+<script type="module">
+    import Inspector from '../dist/index.mjs';
+    document.querySelector('button').addEventListener('click', async () => {
+        const metric = await Inspector.setProxy({url : 'http://localhost:8080/'}).getMetric('https://www.youtube.com/watch?v=0SItu2xPx-4');
+        console.log(metric)
+    });
+</script>
+</html>

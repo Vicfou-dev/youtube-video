@@ -3,12 +3,10 @@ import { YoutubeDislikeUrl, YoutubeApiUrl } from "@youtube-video-core/constants"
 import { convertToNumber } from "@youtube-video-core/utils";
 import { Metric } from "./metric";
 
-export class Inspector {
-
-    private youtube: Core;
+export class Inspector extends Core {
 
     constructor() {
-        this.youtube = new Core();
+        super();
     }
 
     /**
@@ -18,7 +16,7 @@ export class Inspector {
      */
     public async getMetric(url: string): Promise<Metric> {
 
-        const [metadata, analytics, ratings] = await Promise.all([this.youtube.fetchMetadata(url), this.getAnalytics(url), this.getRatings(url)])
+        const [metadata, analytics, ratings] = await Promise.all([this.fetchMetadata(url), this.getAnalytics(url), this.getRatings(url)])
 
         delete metadata.player.videoDetails.isUnpluggedCorpus;
         metadata.player.videoDetails.lengthSeconds = parseInt(metadata.player.videoDetails.lengthSeconds, 10);
@@ -48,7 +46,7 @@ export class Inspector {
     }
 
     private async getAnalytics(url) {
-        const videoId = this.youtube.getVideoId(url);
+        const videoId = this.getVideoId(url);
         const key = Buffer.from("QUl6YVN5Q25jbnJxeVlLcGg3cnhFQUhqRVQ2am5hVU1UaEpZQTdN", 'base64');
         const response = await fetch(`${YoutubeApiUrl}/videos?part=snippet%2CcontentDetails%2Cstatistics&id=${videoId}&key=${key}`);
         const analytics = await response.json();
@@ -59,7 +57,7 @@ export class Inspector {
     }
 
     private async getRatings(url) {
-        const videoId = this.youtube.getVideoId(url);
+        const videoId = this.getVideoId(url);
         const response = await fetch(`${YoutubeDislikeUrl}/votes?videoId=${videoId}`);
         const ratings = await response.json();
         const { dislikes, likes, rating } = ratings;

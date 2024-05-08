@@ -1,38 +1,39 @@
 {
-  "name": "youtube-video-transcript",
-  "version": "1.0.5",
-  "description": "Youtube transcript api",
+  "name": "youtube-video-metric",
+  "version": "1.0.3",
+  "description": "Youtube video metric",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
   "keywords": [
     "YouTube API",
-    "Video Transcript",
+    "Video Metrics",
     "TypeScript",
     "Node.js",
     "YouTube Data",
-    "Transcription",
-    "Closed Captions",
-    "Subtitle Extraction",
-    "YouTube Transcriptor",
-    "Language Processing",
-    "Natural Language Processing",
-    "Text Analysis",
+    "Video Analysis",
+    "Social Media Analysis",
+    "Video Statistics",
+    "YouTube Analytics",
+    "Digital Marketing",
     "Content Analysis",
-    "Video Content",
-    "Speech to Text",
+    "Video Engagement",
+    "View Count",
+    "Like Count",
+    "Dislike Count",
+    "Comment Count",
+    "YouTube Video Inspector",
     "Data Extraction",
     "Data Mining",
     "Web Scraping",
-    "Multilingual Transcripts",
-    "Social Media Analysis"
+    "Social Media Metrics"
+  ],
+  "files": [
+    "dist"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/Vicfou-dev/youtube-video/tree/master/youtube-video-transcript"
+    "url": "https://github.com/Vicfou-dev/youtube-video"
   },
   "scripts": {
     "build": "tsup",

@@ -1,14 +1,11 @@
 import { UserAgent, RegexExtractFromXml } from "@youtube-video-core/constants";
-import { TranscriptionDisabledError } from "@youtube-video-core/errors";
 import { TranscriptionList, Transcription } from "./transcription";
 import { Core } from "@youtube-video-core/index";
 
-export class Transcriptor {
-
-    private youtube: Core;
+export class Transcriptor extends Core {
 
     constructor() {
-        this.youtube = new Core();
+        super();
     }
 
     /**
@@ -62,7 +59,7 @@ export class Transcriptor {
      * @param url Url of the video
      */
     public async listTranscripts(url : string): Promise<TranscriptionList> {
-        const { player } = await this.youtube.fetchMetadata(url);
+        const { player } = await this.fetchMetadata(url);;
         const { captionTracks } = player.captions.playerCaptionsTracklistRenderer;
         const transcripts: Transcription[] = [];
         

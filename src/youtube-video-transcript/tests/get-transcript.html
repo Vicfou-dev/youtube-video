@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fetch Transcript of a video in specific language</title>
+</head>
+<body>
+    <button>Fetch Transcripts</button>
+</body>
+<script type="module">
+    import Transcriptor from '../dist/index.mjs';
+    document.querySelector('button').addEventListener('click', async () => {
+        const transcriptions = await Transcriptor.setProxy({url : 'http://localhost:8080/'}).getTranscript('https://www.youtube.com/watch?v=0SItu2xPx-4', ['fr']);
+        console.log(transcriptions)
+    });
+</script>
+</html>

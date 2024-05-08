@@ -4,14 +4,36 @@
 
 A TypeScript Version of Youtube Video Metric
 
+If you want to use it in node js without typescript you need to specify "type" : "module" in your package.json 
+
+## Table Of Contents
+
+1. [Description](#description)
+2. [Installation](#installation)
+2.1 [Server Side](#server-side)
+2.2 [Client Side](#client-side)
+2.3 [Setup Proxy](#setup-proxy)
+2.4 [Setup CDN](#setup-cdn)
+3. [Example](#example)
+3.1 [Get metric of a video](#get-metric-of-a-video)
+3.1.1 [Server Side](#server-side-1)
+3.1.2 [Client Side](#client-side-1)
+3.1.3 [Data](#data)
+4. [License](#license)
+
 ## Description
 This repository provides an inspector who will gather a lot information about a youtube video
 
 ## Installation
+
+### Server Side
+
 Run this command to install it
 ```
 npm i youtube-video-metric
 ```
+
+### Client Side 
 
 Or import it in your browser
 
@@ -21,14 +43,76 @@ Or import it in your browser
 </script>
 ```
 
+### Setup Proxy
+You also need to setup a proxy (Hello Cors), but don't worry i provide you a small handler to do it
+
+Create a new file **server.js**
+Copy / Paste the following code
+```js
+import { Server } from 'youtube-video-metric';
+Server.default.listen(8080);
+```
+Then run node server.js
+
+### Setup Cdn
+All the following exemple will use the file mjs in local assuming that you have run the npm install command but if you don't want to it you can use the following
+
+```html
+<script type="module">
+    import Inspector from 'https://cdn.jsdelivr.net/npm/youtube-video-metric/dist/index.mjs';
+</script>
+```
+
+But you will need to install a proxy like **tiny-cors-proxy** to bypass the cors option
+
+You can install this package via npm:
+```shell
+npm install tiny-cors-proxy
+```
+
+Then create a new file **server.js** and paste the following snipset :
+
+```js
+import Server from 'tiny-cors-proxy';
+Server.listen(8080);
+```
+
+Then run node server.js
+
 ## Example
 
+### Get Metric of a video
+
+#### Server Side
 Quickly import and translate the video of your choice !
 ```js
 import Inspector from 'youtube-video-metric';
 await Inspector.getMetric('url or video id')
 ```
 
+#### Client Side
+
+If you are working directly in your browser (you must setup a proxy server)
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fetch Transcript of a video in specific language</title>
+</head>
+<body>
+    <button>Fetch Transcripts</button>
+</body>
+<script type="module">
+    import Inspector from '../dist/index.mjs';
+    document.querySelector('button').addEventListener('click', async () => {
+        const metric = await Inspector.setProxy({url : 'http://localhost:8080/'}).getMetric('url or video id');
+    });
+</script>
+</html>
+```
+
+#### Data
 You will receive something like that
 
 ```js
@@ -123,3 +207,6 @@ isManualCaptionsAvailable | boolean | Is some manual captions available on the v
 defaultLanguage | string | default language of the video
 numberOfSubscriber | number | Number of subscribers for the channel who uploaded this video(rounded)
 commentCount | number | Number of comment for the video
+
+## License
+[This project is licensed under the MIT license](license.md) 

@@ -1,26 +1,33 @@
 import { RegexExtractYoutubeVideoId, RegexExtractYoutubeVideoIdFromShortUrl, YoutubeUrl, UserAgent, RegexExtractMetadata, RegexExtractMetadataPlayer } from "./constants";
 import { VideoUnavailableError, TooManyRequestsError, MetricNotAvaible } from "./errors";
 import { match, isBrowser } from "./utils";
-import proxy from "./proxy";
+import proxy, {ProxyOptions} from "./proxy";
 
 export class Core {
+
+    private proxy: proxy
+
+    constructor() {
+        this.proxy = new proxy();
+    }
     /**
      * Fetch video page
      * @param videoId Video id
      */
-    public async fetchVideo(videoId: string): Promise<string> {
+    protected async fetchVideo(videoId: string): Promise<string> {
         return await this.fetchHtml(videoId);
     }
 
-    public setProxy(url: string) {
-        proxy.setProxy(url);
+    public setProxy(options : ProxyOptions) {
+        this.proxy.setProxy(options);
+        return this;
     }
 
-    private async fetchHtml(videoId: string): Promise<string> {
+    protected async fetchHtml(videoId: string): Promise<string> {
         const headers = { 'User-Agent' : UserAgent, 'Accept-Language': 'en-US' }
 
         var url = `${YoutubeUrl}?v=${videoId}`;
-        const response = await proxy.fetchProxy(`${url}`, { headers }, isBrowser());
+        const response = await this.proxy.fetchThroughtProxy(`${url}`, { headers }, isBrowser());
         const page = await response.text();
 
         if(page.includes('class="g-recaptcha')) {
@@ -34,7 +41,7 @@ export class Core {
         return page;
     }
 
-    public async fetchMetadata(url: string): Promise<any> {
+    protected async fetchMetadata(url: string): Promise<any> {
         const videoId = this.getVideoId(url);
 
         const page = await this.fetchVideo(videoId);
@@ -53,7 +60,7 @@ export class Core {
      * Get video id of the video for the given url
      * @param url 
      */
-    public getVideoId(url: string): string {
+    protected getVideoId(url: string): string {
         if(url.length == 11) {
             return url;
         }

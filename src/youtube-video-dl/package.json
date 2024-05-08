@@ -1,5 +1,5 @@
 {
-  "name": "youtube-video-downloader",
+  "name": "youtube-video-dl",
   "version": "1.0.0",
   "description": "Youtube video downloader",
   "main": "./dist/index.js",
@@ -36,7 +36,7 @@
     "url": "https://github.com/Vicfou-dev/youtube-video"
   },
   "scripts": {
-    "build": "tsup && copy lib\\streamsaver.js dist\\streamsaver.js",
+    "build": "tsup",
     "test": "jest"
   },
   "author": "Vicfou",
@@ -49,5 +49,8 @@
     "ts-jest": "^29.1.2",
     "tsup": "^8.0.2",
     "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "universal-file-downloader": "^1.0.5"
   }
 }
